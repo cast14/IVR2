@@ -35,7 +35,7 @@
         elseif($operacion == 2)://MODIFICAR
            $bandera              =       $obj_sucursal->update_sucursal($_REQUEST["id_sucursal"],$array_info);
         elseif($operacion == 3)://ELIMINAR
-            $bandera              =       $obj_sucursal>delete_sucursal($_REQUEST["id_sucursal"]);
+            $bandera              =       $obj_sucursal->delete_sucursal($_REQUEST["id_sucursal"]);
         endif;
         
         if($bandera && $operacion == 1):

@@ -3,9 +3,9 @@ function saveIdModal(id)
 {
 	document.getElementById('id_emp_hide').value=id;
 }
-function saveIdModalPac(id)
+function saveIdModalSucursal(id)
 {
-	document.getElementById('id_pac_hide').value=id;
+	document.getElementById('id_suc_hide').value=id;
 }
 function iniciar()
 {

@@ -26,7 +26,7 @@ final class Sucursal extends Conexion
     
     function update_sucursal($id_sucursal,$array_datos)
     {
-        $sentencia_update   =	$this->obj_con->prepare("UPDATE tbl_sucursal SET nombre_sucursal=?, id_empresa=? direccion=?, telefono_1=?, telefono_2=?, correo=?, website=?, activo=? where id_sucursal = ?");
+        $sentencia_update   =	$this->obj_con->prepare("UPDATE tbl_sucursal SET nombre_sucursal=?, id_empresa=?, direccion=?, telefono_1=?, telefono_2=?, correo=?, website=?, activo=? where id_sucursal = ?");
         $sentencia_update->bindParam(1,$array_datos[0]);		
         $sentencia_update->bindParam(2,$array_datos[1]);
         $sentencia_update->bindParam(3,$array_datos[2]);
@@ -111,7 +111,7 @@ final class Sucursal extends Conexion
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="?vista=upd_sucursal&id='.$row["id_sucursal"].'" >Modificar</a></li>
-                                                        <li><a data-toggle="modal" href="#myModal" onClick="saveIdModal('.$row["id_sucursal"].')" >Eliminar</a></li>
+                                                        <li><a data-toggle="modal" href="#myModal" onClick="saveIdModalSucursal('.$row["id_sucursal"].')" >Eliminar</a></li>
                                                     </ul>
                                                 </div>
                                             </td>';
