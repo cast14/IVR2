@@ -12,8 +12,9 @@
                                 <div class="box-header">
                                     <h3 class="box-title">Registrar</h3>
                                 </div>
-                                <form role="form" method="post">
-                                    <div class="box-body">
+                                <form role="form" method="post" action="controlador/perfil.ctrl.php" name="frm_perfil" id="frm_perfil" autocomplete="off">
+                                <div class="box-body">
+                                 <input type="hidden" name="tipo_operacion" value="1">
                                         <div class="form-group">
                                             <label>Nombre del perfil</label>
                                             <input type="text" name="txtPerfil" class="form-control" required placeholder="Escribir ...">

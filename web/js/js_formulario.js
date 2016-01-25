@@ -7,6 +7,12 @@ function saveIdModalSucursal(id)
 {
 	document.getElementById('id_suc_hide').value=id;
 }
+
+function saveIdModalPerfil(id)
+{
+	document.getElementById('id_per_hide').value=id;
+}
+
 function iniciar()
 {
 	document.getElementById("form_new_empleado").addEventListener("input",controlar, false);

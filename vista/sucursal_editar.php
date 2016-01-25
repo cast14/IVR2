@@ -46,7 +46,7 @@
                                 <form role="form" method="post" action="controlador/sucursal.ctrl.php" name="frm_sucursal_upd" id="frm_sucursal_upd" autocomplete="off">
                                     <div class="box-body">
                                      <input type="hidden" name="tipo_operacion" value="2">
-                                    <input type="hidden" name="id_sucursal" id="id_empresa" value="<?php echo $id_sucursal;?>">
+                                    <input type="hidden" name="id_sucursal" id="id_sucursal" value="<?php echo $id_sucursal;?>">
                                         <div class="form-group col-sm-12">
                                             <label>Nombre de la Sucursal</label>
                                             <input type="text" name="txtNombre" value="<?php echo $nombre_sucursal;?>" class="form-control" required placeholder="Escribir ...">
@@ -79,13 +79,13 @@
                                             <input type="text" name="txtWebsite" value="<?php echo $website;?>" class="form-control" placeholder="Escribir ...">
                                         </div>
                                          <div class="form-group col-sm-12">
-                                    <?php 
-                                      if ($activo):                                     
-                                         echo "<input type='checkbox' name='chk_activo' style='width: 2%;' checked class='form-control' id='chk_activo' /> ";
-                                      else:
-                                         echo "<input type='checkbox' name='chk_activo' style='width: 2%;' class='form-control' id='chk_activo' />  ";
-                                      endif;
-                                    ?>      
+                                            <?php 
+                                              if ($activo):                                     
+                                                 echo "<input type='checkbox' name='chk_activo' style='width: 2%;' checked class='form-control' id='chk_activo' /> ";
+                                              else:
+                                                 echo "<input type='checkbox' name='chk_activo' style='width: 2%;' class='form-control' id='chk_activo' />  ";
+                                              endif;
+                                            ?>      
                                         </div>
                                     </div>
                                     <div class="box-footer alinr">
