@@ -42,6 +42,21 @@ final class Usuarios extends Conexion
         endif;
     }
 
+    function update_password($id_user,$clave)
+    {
+        $sentencia_update   =   $this->obj_con->prepare("UPDATE tbl_usuarios SET  clave=? where id_usuario = ?");        
+        $sentencia_update->bindParam(1,md5($clave));       
+        $sentencia_update->bindParam(2,  $id_user);
+        $sentencia_update->execute();
+        $conteo_registros   =   $sentencia_update->rowCount();
+        
+        if($conteo_registros > 0):
+            return true;
+        else:
+            return false;
+        endif;
+    }
+
     function update_user_sin_pass($id_user,$array_datos)
     {
         $sentencia_update   =   $this->obj_con->prepare("UPDATE tbl_usuarios SET  nick=?, nombre_usuario=?, apellido_usuario=?, id_perfil=?, id_sucursal=?, activo=? where id_usuario = ?");
@@ -115,7 +130,7 @@ final class Usuarios extends Conexion
     function select_usuario($id_usuario)
     {
         $array_datos        =   array();
-        $sentencia_select   =   $this->obj_con->prepare("select id_usuario, nick, nombre_usuario, apellido_usuario, id_perfil, id_empresa, CONCAT(s.id_empresa,'-', u.id_sucursal) as id_sucursal, u.activo 
+        $sentencia_select   =   $this->obj_con->prepare("select id_usuario, nick, nombre_usuario, apellido_usuario, id_perfil, id_empresa, (u.id_sucursal) as id_sucursal, u.activo 
         from tbl_usuarios u inner join tbl_sucursal s on s.id_sucursal= u.id_sucursal where id_usuario = ?");
         $sentencia_select->bindParam(1,$id_usuario);       
         $sentencia_select->execute();

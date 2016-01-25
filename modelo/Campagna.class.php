@@ -51,9 +51,12 @@ final class Campagnas extends Conexion
         $contador           =   (integer) 0;
         $sentencia_select   =	$this->obj_con->prepare("SELECT 
 														id_campagna as ID,
-														upper(descripcion) as DES
-														FROM db_ivr.tbl_campagnas
-														ORDER BY fecha_creacion DESC;");
+														upper(descripcion) as DES, 
+                                                        s.nombre_sucursal,
+                                                        CASE WHEN activa=1 THEN 'SI' ELSE 'NO' END AS activa
+														FROM tbl_campagnas c 
+                                                        inner join tbl_sucursal s on c.id_sucursal= s.id_sucursal
+														ORDER BY c.fecha_creacion DESC");
         $sentencia_select->execute();
         $conteo_registros	=	$sentencia_select->rowCount();
         
@@ -76,6 +79,8 @@ final class Campagnas extends Conexion
 											</td>'
                                         . '<td>'.$row["ID"].'</td>'
                                         . '<td >'.$row["DES"].'</td>'
+                                        . '<td >'.$row["nombre_sucursal"].'</td>'
+                                        . '<td >'.$row["activa"].'</td>'
                                         .'</tr>';
                 $salida_final       =   $salida_final.$salida_inicial;
             endforeach;

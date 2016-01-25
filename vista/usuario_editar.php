@@ -3,6 +3,7 @@
     require ("servicio/Conexion.class.php");
     require ("modelo/usuarios.class.php");
     require ("modelo/combo_catalogos.class.php");
+    require ("modelo/comboempresa.php");
 
     
     $obj_combos      =   new Combos();
@@ -31,12 +32,6 @@
 
 <script type="text/javascript">
 
-function ddl_combo_sucursal(id)
-{
-
-
-}
-
 function ValidarPassword(p1,p2)
 {
     var pass1= p1.value;
@@ -51,6 +46,39 @@ function ValidarPassword(p1,p2)
 }
 
 </script>
+
+  <script>
+        $(document).ready(function(){
+            $("#cbEmpresa").change(function() {
+                var pais = $(this).val();
+                
+                if(pais > 0)
+                {
+                    var datos = {
+                        id_empresa : $(this).val()
+                    };
+                    
+                    $.post("modelo/combosucursal.php", datos, function(ciudades) {
+                        var $comboCiudades = $("#cbSucursal");
+                        
+                        $comboCiudades.empty();
+                         $comboCiudades.append("<option value=''>" + "-Seleccione-" + "</option>");
+                        $.each(ciudades, function(index, cuidad) {
+                            //console.log(ciudades[index]["id_sucursal"]);
+
+                            $comboCiudades.append("<option value='"+ ciudades[index]["id_sucursal"] +"'>" + cuidad.nombre + "</option>");
+                        });
+                    }, 'json');
+                }
+                else
+                {
+                    var $comboCiudades = $("#cbSucursal");
+                    $comboCiudades.empty();
+                    $comboCiudades.append("<option>Seleccione una sucursal</option>");
+                }
+            });
+        }); 
+    </script>
 
             <aside class="right-side">
                 <section class="content-header">
@@ -80,15 +108,7 @@ function ValidarPassword(p1,p2)
                                         <div class="form-group col-sm-6">
                                             <label>Usuario</label>
                                             <input type="text" name="txtUsuario" value="<?php echo $usuario;?>" class="form-control" required placeholder="Escribir ...">
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label>Contraseña</label>
-                                            <input type="password" name="txtClave" class="form-control" placeholder="Escribir ...">
-                                        </div>
-                                         <div class="form-group col-sm-6">
-                                            <label>Confirmar Contraseña</label>
-                                            <input type="password" name="txtClave2" class="form-control" placeholder="Escribir ...">
-                                        </div>
+                                        </div>                                      
                                         <div class="form-group col-sm-6">
                                             <label>Perfil</label>
                                             <select class="form-control" name="cbPerfil" required>
@@ -98,16 +118,16 @@ function ValidarPassword(p1,p2)
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label>Empresa</label>
-                                            <select class="form-control" name="cbEmpresa" required>
+                                            <select class="form-control" name="cbEmpresa" id="cbEmpresa"required>
                                                  <option value="">-Seleccione-</option>
-                                                <?php echo $obj_combos->combo_empresa($id_empresa);?>
+                                               <?php echo $obj_combos->combo_empresa($id_empresa); ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label>Sucursal</label>
-                                            <select class="form-control" name="cbSucursal" required>
+                                            <select class="form-control" name="cbSucursal" id="cbSucursal" required>
                                                  <option value="">-Seleccione-</option>
-                                                <?php echo $obj_combos->combo_sucursal($id_sucursal); ?>
+                                                <?php echo $obj_combos->combo_sucursal($id_sucursal,$id_empresa); ?>
                                             </select>
                                         </div>
                                          <div class="form-group col-sm-12">
@@ -120,14 +140,52 @@ function ValidarPassword(p1,p2)
                                     ?>      
                                         </div>
                                     </div>
-                                    <div class="box-footer alinr">
+                                    <div class="box-footer">
+                                    <div class="col-sm-6">
                                         <button type="submit" class="btn btn-primary">Editar</button>
                                         <a href="./?vista=list_usuario" class="btn btn-danger">Regresar</a>
+                                      </div>
+                                      <br>
+                                      <div class="col-sm-6">
+                                          <a data-toggle="modal" href="#myModal" class="btn btn-success" style="margin-left:0px">Reestablecer Contraseña</a>
+                                     
+                                      </div>
+                                        
+
                                     </div>
+
                                 </form>
                             </div>
                         </div>
                     </div>
                 </section>
             </aside>
-    
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" style="    margin-top: 10%;    width: 40%;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="    font-size: 18px;font-weight: 700;color: #3498DB;">
+          <button type="button" class="close" data-dismiss="modal" style="    font-size: 20pt;">&times;</button>
+            <span class="panel-icon"> 
+          <i class="fa fa-star-o"></i> 
+       </span> 
+       <span class="panel-title" style="text-transform:uppercase"> Mensaje de Confirmación</span> 
+        </div>
+        <div class="modal-body">
+          <form role="form">
+              <input type="hidden" id="id_per_hide" value="">
+            <h4 class="mt5"> ¿Seguro que desea reestablecer la contraseña a este usuario?</h3>
+          </form>
+        </div>
+        <div class="modal-footer">
+         <a data-toggle="modal" href="#myModal" style="width: 75px;"  class="btn btn-primary">Aceptar</a>
+         <button type="button" class="btn btn-primary"  data-dismiss="modal">Cancelar</button>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>

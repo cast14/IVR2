@@ -17,34 +17,42 @@
                                     <h3 class="box-title">Registros</h3>
                                     <div class="box-tools">
                                         <div class="input-group">
-                                            <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Buscar ..." />
+                                            <input type="text" id="table_search" class="form-control input-sm pull-right" style="width: 220px;" placeholder="Buscar ..." />
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="box-body table-responsive no-padding">
-                                    <table class="table table-hover">
+
+                                  <div class="box-body table-responsive no-padding">
+                                    <table  class="table table-striped table-hover mbn footable" data-filter="#table_search" data-page-navigation=".pagination" data-page-size="5">
+                                         <thead>
                                         <tr>
-                                            <th>OPCIONES</th>
-                                            <th>ID</th>
-                                            <th>CAMPAÑA</th>
+                                            <th style="width: 9%;">OPCIONES</th>
+                                            <th style="width: 8%;">ID</th>
+                                            <th style="width: 35%;">CAMPAÑA</th>
+                                             <th style="width: 15%;">SUCURSAL</th>
+                                            <th style="width:5%">ACTIVA</th>
                                         </tr>
-                                        <?PHP
-											echo listar_campagnas();
-										?>
-                                    </table>
-                                </div>
-                                <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
-                                </div>
+                                        
+                                         </thead>
+                                          <tbody style="font-size:12px">
+                                         <?PHP
+                                            echo listar_campagnas();
+                                        ?>
+                                         </tbody>
+                                        <tfoot class="footer-menu">
+                                        <tr>
+                                          <td colspan="10">
+                                           <nav class="text-right">
+                                              <ul class="pagination hide-if-no-paging"></ul>
+                                            </nav>
+                                          </td>
+                                        </tr>
+                                      </tfoot>
+                                    </table>                                   
+                                </div>                               
                             </div>
                         </div>
                     </div>

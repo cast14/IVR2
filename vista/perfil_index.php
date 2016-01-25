@@ -24,7 +24,7 @@
                                     <h3 class="box-title">Registros</h3>
                                     <div class="box-tools">
                                         <div class="input-group">
-                                            <input type="text" id="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Buscar ..." />
+                                            <input type="text" id="table_search" class="form-control input-sm pull-right" style="width: 220px;" placeholder="Buscar ..." />
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                                             </div>
@@ -60,7 +60,9 @@
                         </div>
                     </div>
                 </section>
-            </aside> <div class="container">
+            </aside> 
+
+<div class="container">
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog" style="    margin-top: 10%;    width: 40%;">

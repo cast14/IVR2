@@ -52,17 +52,20 @@ final class Combos extends Conexion
     }
 
 
-    function combo_sucursal($id_sucursal)
+    function combo_sucursal($id_sucursal,$id_empresa)
     {
             $salida_inicial     =   (string)  '';
             $salida_final       =   (string)  '';
             $contador           =   (integer) 0; 
             $option_select   ='';
             if($id_sucursal==-1):
-                $sentencia_select   =   $this->obj_con->prepare("SELECT CONCAT(id_empresa,'-', id_sucursal) as id_sucursal, nombre_sucursal FROM tbl_sucursal where activo=1 order by nombre_sucursal asc");
+                $sentencia_select   =   $this->obj_con->prepare("SELECT   id_sucursal, nombre_sucursal FROM tbl_sucursal 
+                    where activo=1 and id_empresa=? order by nombre_sucursal asc");
             else:
-                $sentencia_select   =   $this->obj_con->prepare("SELECT CONCAT(id_empresa,'-', id_sucursal) as id_sucursal, nombre_sucursal FROM tbl_sucursal where activo=1 order by nombre_sucursal asc");            
+                $sentencia_select   =   $this->obj_con->prepare("SELECT  id_sucursal, nombre_sucursal FROM tbl_sucursal 
+                    where activo=1 and id_empresa=?  order by nombre_sucursal asc");            
             endif;
+            $sentencia_select->bindParam(1,  $id_empresa);
             $sentencia_select->execute();
             $conteo_registros   =   $sentencia_select->rowCount();
             
